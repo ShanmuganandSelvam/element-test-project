@@ -25,8 +25,10 @@ COPY . .
 
 # Accept build argument for Vite base path
 ARG BASE_PATH=/
+ARG NPM_TOKEN=/
 
 ENV VITE_BASE_PATH=${BASE_PATH}
+ENV ARTIFACTORY_TOKEN=${NPM_TOKEN}
 
 # Build the application
 RUN npm run build
