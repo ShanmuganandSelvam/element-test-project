@@ -16,6 +16,7 @@ RUN apk add --no-cache \
 
 # Copy package files first for better caching
 COPY package.json package-lock.json* ./
+COPY .npmrc ./
 
 # Install dependencies with npm ci for reproducible builds
 RUN npm ci
