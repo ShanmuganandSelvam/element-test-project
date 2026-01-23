@@ -4,6 +4,13 @@
 # Stage 1: Build stage
 FROM public.ecr.aws/docker/library/node:18-alpine AS builder
 
+# Accept build argument for Vite base path
+ARG BASE_PATH=/
+ARG NPM_TOKEN=/
+
+ENV VITE_BASE_PATH=${BASE_PATH}
+ENV ARTIFACTORY_TOKEN=${NPM_TOKEN}
+
 # Set working directory
 WORKDIR /app
 
@@ -23,13 +30,6 @@ RUN npm ci
 
 # Copy source code
 COPY . .
-
-# Accept build argument for Vite base path
-ARG BASE_PATH=/
-ARG NPM_TOKEN=/
-
-ENV VITE_BASE_PATH=${BASE_PATH}
-ENV ARTIFACTORY_TOKEN=${NPM_TOKEN}
 
 # Build the application
 RUN npm run build
